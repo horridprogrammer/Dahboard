@@ -1,0 +1,70 @@
+{
+  "categories": [
+    {
+      "id": "cspm-executive",
+      "name": "CSPM Executive Dashboard",
+      "widgets": [
+        {
+          "id": "w1",
+          "name": "Cloud Risk Overview",
+          "text": "Displays the total number of cloud security risks and their severity levels.",
+          "type": "chart",
+          "data": {
+            "high": 12,
+            "medium": 27,
+            "low": 45
+          }
+        },
+        {
+          "id": "w2",
+          "name": "Compliance Status",
+          "text": "Shows compliance score and failed policies.",
+          "type": "progress",
+          "data": {
+            "score": 82,
+            "failedPolicies": 7
+          }
+        },
+        {
+          "id": "w3",
+          "name": "Recent Alerts",
+          "text": "List of top 3 critical alerts generated in the last 24 hours.",
+          "type": "list",
+          "data": [
+            { "alert": "IAM user with admin privileges created", "severity": "High" },
+            { "alert": "Unencrypted S3 bucket found", "severity": "High" },
+            { "alert": "Suspicious login detected", "severity": "Medium" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "security-ops",
+      "name": "Security Ops Dashboard",
+      "widgets": [
+        {
+          "id": "w4",
+          "name": "Incident Summary",
+          "text": "Total incidents and their current status.",
+          "type": "summary",
+          "data": {
+            "open": 5,
+            "inProgress": 3,
+            "resolved": 12
+          }
+        },
+        {
+          "id": "w5",
+          "name": "Threat Intelligence",
+          "text": "Latest threat intelligence feeds and suspicious IP addresses.",
+          "type": "table",
+          "data": [
+            { "ip": "192.168.1.101", "threatLevel": "High" },
+            { "ip": "10.0.0.55", "threatLevel": "Medium" },
+            { "ip": "172.16.2.45", "threatLevel": "Low" }
+          ]
+        }
+      ]
+    }
+  ]
+}
