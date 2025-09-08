@@ -9,32 +9,36 @@
           "name": "Cloud Risk Overview",
           "text": "Displays the total number of cloud security risks and their severity levels.",
           "type": "chart",
+          "chartType": "doughnut",
           "data": {
-            "high": 12,
-            "medium": 27,
-            "low": 45
+            "labels": ["High", "Medium", "Low"],
+            "datasets": [
+              {
+                "label": "Cloud Security Risks",
+                "data": [12, 27, 45],
+                "backgroundColor": ["#FF6384", "#FFCE56", "#36A2EB"],
+                "hoverBackgroundColor": ["#FF6384", "#FFCE56", "#36A2EB"]
+              }
+            ]
           }
         },
         {
           "id": "w2",
           "name": "Compliance Status",
           "text": "Shows compliance score and failed policies.",
-          "type": "progress",
+          "type": "chart",
+          "chartType": "doughnut",
           "data": {
-            "score": 82,
-            "failedPolicies": 7
+            "labels": ["Score", "Failed Policies"],
+            "datasets": [
+              {
+                "label": "Compliance Status",
+                "data": [82, 7],
+                "backgroundColor": ["#36A2EB", "#FF6384"],
+                "hoverBackgroundColor": ["#36A2EB", "#FF6384"]
+              }
+            ]
           }
-        },
-        {
-          "id": "w3",
-          "name": "Recent Alerts",
-          "text": "List of top 3 critical alerts generated in the last 24 hours.",
-          "type": "list",
-          "data": [
-            { "alert": "IAM user with admin privileges created", "severity": "High" },
-            { "alert": "Unencrypted S3 bucket found", "severity": "High" },
-            { "alert": "Suspicious login detected", "severity": "Medium" }
-          ]
         }
       ]
     },
@@ -46,23 +50,37 @@
           "id": "w4",
           "name": "Incident Summary",
           "text": "Total incidents and their current status.",
-          "type": "summary",
+          "type": "chart",
+          "chartType": "doughnut",
           "data": {
-            "open": 5,
-            "inProgress": 3,
-            "resolved": 12
+            "labels": ["Open", "In Progress", "Resolved"],
+            "datasets": [
+              {
+                "label": "Incident Summary",
+                "data": [5, 3, 12],
+                "backgroundColor": ["#FF6384", "#FFCE56", "#36A2EB"],
+                "hoverBackgroundColor": ["#FF6384", "#FFCE56", "#36A2EB"]
+              }
+            ]
           }
         },
         {
           "id": "w5",
           "name": "Threat Intelligence",
           "text": "Latest threat intelligence feeds and suspicious IP addresses.",
-          "type": "table",
-          "data": [
-            { "ip": "192.168.1.101", "threatLevel": "High" },
-            { "ip": "10.0.0.55", "threatLevel": "Medium" },
-            { "ip": "172.16.2.45", "threatLevel": "Low" }
-          ]
+          "type": "chart",
+          "chartType": "doughnut",
+          "data": {
+            "labels": ["High", "Medium", "Low"],
+            "datasets": [
+              {
+                "label": "Threat Levels",
+                "data": [1, 1, 1],
+                "backgroundColor": ["#FF6384", "#FFCE56", "#36A2EB"],
+                "hoverBackgroundColor": ["#FF6384", "#FFCE56", "#36A2EB"]
+              }
+            ]
+          }
         }
       ]
     }
