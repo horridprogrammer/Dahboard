@@ -1,14 +1,25 @@
-import data from "../data/data.json";
+import { useState } from "react";
+import Data from "../data/data.json";
 import Category from "./Category";
 import "./dashboard.css";
+import AddWidget from "../AddWidget";
 
 const Dashboard = () => {
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [data,setData] = useState(Data);
   return (
     <div className="dashboard">
       <h1>CNAPP Dashboard</h1>
       <div className="dashboard-controls">
-      <input type="button" value="Add Widget +" className="add-widget-btn"></input>
-      <input type="button" value="⟳" className="refresh-btn"></input>
+      <input type="button" value="Add Widget +" className="add-widget-btn" onClick={()=>setIsModalOpen(true)}></input>
+      <AddWidget
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)
+        }
+        category = {data}
+        setCategory = {setData}
+      />
+      <input type="button" value="⟳" className="refresh-btn" onClick={()=>window.location.reload()}></input>
       <input type="button" value="⋮" className="option-btn"></input>
       <select className="select-btn">
         <option>Last 2 days</option>
