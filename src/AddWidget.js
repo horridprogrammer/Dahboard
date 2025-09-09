@@ -1,154 +1,124 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./AddWidget.css";
-const AddWidget = ({ isOpen, onClose , category , setCategory }) => {
-    const [activeTab, setActiveTab] = useState("CSPM");
-    const [Data,setData] = useState(category);
-  
-    if (!isOpen) return null;
 
-    
-    const handleCheckboxChange=(e,wid,name)=>{
-        setData(prev => ({
+const AddWidget = ({ isOpen, onClose, category, setCategory }) => {
+  const [activeTab, setActiveTab] = useState("CSPM");
+  const [localData, setLocalData] = useState(category);
 
-        }))
-        if (e.target.checked) {
-            setData(prev => ({
-                ...prev,
-                categories: prev.categories.map(a => {
-                if (a.name === name) {
-                    return {
-                    ...a,
-                    widgets: [
-                        ...a.widgets,
-                        a.widgets.find(w => w.id === wid)
-                    ]
-                    };
-                }
-                return a;
-                })
-            }));
-        }else{
-            setData(...prev,categories.map((a=>{
-                if(a.name === name){
-                    return {
-                        
-                    }
-                }
-            })))
-        }
+  useEffect(() => {
+    if (isOpen) {
+      setLocalData(category);
+    }
+  }, [isOpen, category]);
 
+  if (!isOpen) return null;
+
+  const handleCheckboxChange = (e, wid, catName) => {
+    const currentCat = localData.categories.find(c => c.name === catName);
+    const visibleCount = currentCat.widgets.filter(w => w.visible).length;
+
+    if (!e.target.checked && visibleCount <= 0) return;
+
+    if (e.target.checked && visibleCount >= 3) {
+      alert("You can select a maximum of 3 widgets per category!");
+      return;
     }
 
-    return (
+    setLocalData(prev => ({
+      ...prev,
+      categories: prev.categories.map(cat => {
+        if (cat.name === catName) {
+          return {
+            ...cat,
+            widgets: cat.widgets.map(widget =>
+              widget.id === wid ? { ...widget, visible: e.target.checked } : widget
+            )
+          };
+        }
+        return cat;
+      })
+    }));
+  };
+
+  const handleSubmit = () => {
+    setCategory(localData);
+    onClose();
+  };
+
+  const renderCheckboxes = (catName) => {
+    const categoryObj = localData.categories.find(c => c.name === catName);
+    if (!categoryObj) return null;
+
+    return categoryObj.widgets.map((widget, idx) => (
+      <div className="contain" key={widget.id}>
+        <input
+          type="checkbox"
+          id={`${catName}-${idx}`}
+          checked={widget.visible}
+          onChange={(e) => handleCheckboxChange(e, widget.id, catName)}
+        />
+        <label htmlFor={`${catName}-${idx}`}>{widget.name}</label>
+      </div>
+    ));
+  };
+
+  return (
     <div className="drawer-overlay" onClick={onClose}>
-        <div className="drawer-panel" onClick={(e) => e.stopPropagation()}>
-            <div className="drawer-header">
-                <h2>Add Widget</h2>
-                <button className="close-btn" onClick={onClose}>✕</button>
-            </div>
-
-            <div className="tabs">
-                <button
-                className={`tab-btn ${activeTab === "CSPM" ? "active" : ""}`}
-                onClick={() => setActiveTab("CSPM")}
-                >
-                CSPM
-                </button>
-                <button
-                className={`tab-btn ${activeTab === "CWPP" ? "active" : ""}`}
-                onClick={() => setActiveTab("CWPP")}
-                >
-                CWPP
-                </button>
-                <button
-                className={`tab-btn ${activeTab === "Image" ? "active" : ""}`}
-                onClick={() => setActiveTab("Image")}
-                >
-                Image
-                </button>
-                <button
-                className={`tab-btn ${activeTab === "Ticket" ? "active" : ""}`}
-                onClick={() => setActiveTab("Ticket")}
-                >
-                Ticket
-                </button>
-            </div>
-
-            <div className="tab-content">
-                {activeTab === "CSPM" && (
-                <div className="add-widget-content">
-                    {category.categories.find((x)=>x.name ==="CSPM Executive Dashboard").widgets.map((y,index)=>
-                        <div className="contain" key={y.id}>
-                            <input type="checkbox" className="check" id={index} onChange={(e)=>handleCheckboxChange(e,y.id,"CSPM Executive Dashboard")}></input>
-                            <label htmlFor={index}>{y.name}</label>
-                        </div>
-                    )}
-                    <div className="overlay-footer">
-                        <button type="button" className="cancel-btn">Cancel</button>
-                        <button type="submit" className="submit-btn">Confirm</button>
-                    </div>
-                </div>
-                
-                )}
-
-                {activeTab === "CWPP" && (
-                <div className="add-widget-content">
-                    {category.categories.find((x)=>x.name ==="Security Ops Dashboard").widgets.map((y,index)=>
-                        <div className="contain" key={y.id}>
-                            <input type="checkbox" className="check" id={index} onChange={(e)=>handleCheckboxChange}></input>
-                            <label htmlFor={index}>{y.name}</label>
-                        </div>
-                    )}
-                    <div className="overlay-footer">
-                        <button type="button" className="cancel-btn">Cancel</button>
-                        <button type="submit" className="submit-btn">Confirm</button>
-                    </div>
-                </div>
-                )}
-
-                {activeTab === "Image" && (
-                <div className="add-widget-content">
-                    <div className="form-scroll">
-                    <h3>Summary Widgets</h3>
-                    <p>Add a summary card with key metrics.</p>
-                    <form className="form">
-                        <label>Title:</label>
-                        <input type="text" placeholder="Enter title" />
-
-                        <label>Metric:</label>
-                        <input type="number" placeholder="Enter metric value" />
-                    </form>
-                    </div>
-                    <div className="overlay-footer">
-                    <button type="button" className="cancel-btn">Cancel</button>
-                    <button type="submit" className="submit-btn">Confirm</button>
-                    </div>
-                </div>
-                )}
-
-                {activeTab === "Ticket" && (
-                <div className="add-widget-content">
-                    <div className="form-scroll">
-                    <h3>Summary Widgets</h3>
-                    <p>Add a summary card with key metrics.</p>
-                    <form className="form">
-                        <label>Title:</label>
-                        <input type="text" placeholder="Enter title" />
-
-                        <label>Metric:</label>
-                        <input type="number" placeholder="Enter metric value" />
-                    </form>
-                    </div>
-                    <div className="overlay-footer">
-                    <button type="button" className="cancel-btn">Cancel</button>
-                    <button type="submit" className="submit-btn">Confirm</button>
-                    </div>
-                </div>
-                )}
-            </div>
+      <div className="drawer-panel" onClick={(e) => e.stopPropagation()}>
+        <div className="drawer-header">
+          <h2>Add Widget</h2>
+          <button className="close-btn" onClick={onClose}>✕</button>
         </div>
+
+        <div className="tabs">
+          {["CSPM", "CWPP", "Image", "Ticket"].map(tab => (
+            <button
+              key={tab}
+              className={`tab-btn ${activeTab === tab ? "active" : ""}`}
+              onClick={() => setActiveTab(tab)}
+            >
+              {tab}
+            </button>
+          ))}
+        </div>
+
+        <div className="tab-content">
+          {(activeTab === "CSPM" || activeTab === "CWPP") && (
+            <div className="add-widget-content">
+              {renderCheckboxes(
+                activeTab === "CSPM"
+                  ? "CSPM Executive Dashboard"
+                  : "Security Ops Dashboard"
+              )}
+              <div className="overlay-footer">
+                <button className="cancel-btn" onClick={onClose}>Cancel</button>
+                <button className="submit-btn" onClick={handleSubmit}>Confirm</button>
+              </div>
+            </div>
+          )}
+
+          {(activeTab === "Image" || activeTab === "Ticket") && (
+            <div className="add-widget-content">
+              <div className="form-scroll">
+                <h3>Summary Widgets</h3>
+                <p>Add a summary card with key metrics.</p>
+                <form className="form">
+                  <label>Title:</label>
+                  <input type="text" placeholder="Enter title" />
+                  <label>Metric:</label>
+                  <input type="number" placeholder="Enter metric value" />
+                </form>
+              </div>
+              <div className="overlay-footer">
+                <button className="cancel-btn" onClick={onClose}>Cancel</button>
+                <button className="submit-btn" onClick={handleSubmit}>Confirm</button>
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
     </div>
-    );
+  );
 };
 
 export default AddWidget;

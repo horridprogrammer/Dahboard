@@ -9,6 +9,7 @@
           "name": "Cloud Risk Overview",
           "text": "Displays the total number of cloud security risks and their severity levels.",
           "type": "chart",
+          "visible": true,
           "chartType": "doughnut",
           "data": {
             "labels": ["High", "Medium", "Low"],
@@ -27,6 +28,7 @@
           "name": "Compliance Status",
           "text": "Shows compliance score and failed policies.",
           "type": "chart",
+          "visible": true,
           "chartType": "doughnut",
           "data": {
             "labels": ["Score", "Failed Policies"],
@@ -51,6 +53,7 @@
           "name": "Incident Summary",
           "text": "Total incidents and their current status.",
           "type": "chart",
+          "visible": true,
           "chartType": "doughnut",
           "data": {
             "labels": ["Open", "In Progress", "Resolved"],
@@ -69,6 +72,7 @@
           "name": "Threat Intelligence",
           "text": "Latest threat intelligence feeds and suspicious IP addresses.",
           "type": "chart",
+          "visible": true,
           "chartType": "doughnut",
           "data": {
             "labels": ["High", "Medium", "Low"],

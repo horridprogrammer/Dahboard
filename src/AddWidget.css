@@ -1,4 +1,3 @@
-/* Overlay background */
 .drawer-overlay {
   position: fixed;
   top: 0;
@@ -11,7 +10,6 @@
   z-index: 1000;
 }
 
-/* Drawer panel */
 .drawer-panel {
   width: 50%;
   max-width: 800px;
@@ -24,7 +22,6 @@
   position: relative;
 }
 
-/* Slide-in animation */
 @keyframes slideIn {
   from {
     transform: translateX(100%);
@@ -34,7 +31,6 @@
   }
 }
 
-/* Header */
 .drawer-header {
   display: flex;
   justify-content: space-between;
@@ -57,7 +53,6 @@
   color: #000;
 }
 
-/* Tabs */
 .tabs {
   display: flex;
   border-bottom: 1px solid #e5e7eb;
@@ -85,7 +80,6 @@
   color: #111827;
 }
 
-/* Content area */
 .tab-content {
   flex: 1;
   display: flex;
@@ -95,11 +89,10 @@
 
 }
 
-/* Form scroll container */
 .form-scroll {
   flex: 1;
   overflow-y: auto;
-  padding-bottom: 80px; /* To prevent content hiding behind footer */
+  padding-bottom: 80px;
 }
 
 .form label {
@@ -126,7 +119,6 @@
   box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
 }
 
-/* Footer buttons */
 .overlay-footer {
   position: absolute;
   bottom: 0;
@@ -169,30 +161,28 @@
   background: #2563eb;
 }
 
-/* Wrapper for each widget option */
 .contain {
   display: flex;
   align-items: center;
   justify-content: flex-start;
   gap: 12px;
   padding: 10px 14px;
-  border: 1px solid #ccc; /* Light gray border for rectangle */
-  border-radius: 8px;      /* Slightly rounded corners */
-  background-color: transparent; /* No fill color */
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: transparent;
   cursor: pointer;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
   margin-bottom: 10px;
 }
 
 .contain:hover {
-  border-color: #888; /* Darker border on hover */
-  box-shadow: 0 0 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  border-color: #888;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
 }
 
-/* Checkbox styling */
 .check {
   width: 18px;
   height: 18px;
-  accent-color: #007bff; /* Modern blue checkmark */
+  accent-color: #007bff;
   cursor: pointer;
 }

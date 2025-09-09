@@ -56,3 +56,33 @@
   border-radius: 6px;
   cursor: pointer;
 }
+
+.dashboard-container {
+  padding: 20px;
+}
+
+.dashboard-search {
+  margin-right: 20px;
+}
+
+.search-input {
+  width: 100%;
+  max-width: 300px;
+  padding: 8px 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.dashboard-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.no-widgets {
+  color: #888;
+  font-size: 14px;
+  padding: 10px 0;
+  text-align: center;
+}
